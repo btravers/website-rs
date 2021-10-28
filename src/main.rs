@@ -4,7 +4,7 @@ mod components;
 
 use components::title::Title;
 
-pub struct App {}
+struct App {}
 
 impl Component for App {
     type Message = ();
@@ -15,7 +15,7 @@ impl Component for App {
     }
 
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-        false
+        unimplemented!()
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {

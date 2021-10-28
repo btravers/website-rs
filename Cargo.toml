@@ -13,3 +13,4 @@ categories = ["gui", "wasm", "web-programming"]
 [dependencies]
 yew = "0.18"
 boolinator = "2.4.0"
+derive_more = "0.99.16"

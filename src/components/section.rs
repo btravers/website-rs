@@ -24,7 +24,7 @@ impl Component for Section {
     }
 
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-        false
+        unimplemented!()
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {

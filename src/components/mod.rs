@@ -1,5 +1,5 @@
 pub mod title;
 
 mod section;
-mod linkedin;
-mod github;
+mod social_media_link;
+mod icons;

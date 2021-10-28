@@ -11,7 +11,7 @@ impl Component for LinkedIn {
     }
 
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-        false
+        unimplemented!()
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
@@ -23,8 +23,8 @@ impl Component for LinkedIn {
             <svg
                 class=classes!("w-11", "h-11", "fill-current")
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width=24
+                height=24
                 viewBox="0 0 24 24"
             >
                 <path

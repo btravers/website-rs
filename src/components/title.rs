@@ -1,8 +1,15 @@
 use yew::prelude::*;
 
-use super::section::Section;
-use super::linkedin::LinkedIn;
-use super::github::GitHub;
+use crate::{
+    components::{
+        section::Section,
+        social_media_link::SocialMediaLink,
+        icons::{
+            linkedin::LinkedIn,
+            github::GitHub,
+        },
+    },
+};
 
 pub struct Title {}
 
@@ -15,7 +22,7 @@ impl Component for Title {
     }
 
     fn update(&mut self, _msg: Self::Message) -> ShouldRender {
-        false
+        unimplemented!()
     }
 
     fn change(&mut self, _props: Self::Properties) -> ShouldRender {
@@ -31,22 +38,12 @@ impl Component for Title {
                         <h2>{ "développeur full stack freelance" }</h2>
                     </div>
                     <div class=classes!("inline-grid", "grid-cols-2", "gap-5", "my-5")>
-                        <a
-                            href="https://www.linkedin.com/in/btraversfr/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="linkedin"
-                        >
-                            <LinkedIn/>
-                        </a>
-                        <a
-                            href="https://www.github.com/btravers/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="github"
-                        >
-                            <GitHub/>
-                        </a>
+                        <SocialMediaLink href="https://www.linkedin.com/in/btraversfr/">
+                            <LinkedIn />
+                        </SocialMediaLink>
+                        <SocialMediaLink href="https://www.github.com/btravers/">
+                            <GitHub />
+                        </SocialMediaLink>
                     </div>
                 </div>
             </Section>
