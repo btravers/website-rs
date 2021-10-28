@@ -26,7 +26,7 @@ impl Component for Title {
         html! {
             <Section dark=true>
                 <div class=classes!("h-full", "flex", "flex-col", "gap-3", "items-center", "justify-center")>
-                    <img class=classes!("max-w-4xl") src="/images/logo.svg" alt=""/>
+                    <img class=classes!("max-w-4xl") src="images/logo.svg" alt=""/>
                     <div class=classes!("text-xl", "md:text-3xl", "text-center")>
                         <h2>{ "développeur full stack freelance" }</h2>
                     </div>
