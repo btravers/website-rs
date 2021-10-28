@@ -1,6 +1,9 @@
 name: ci
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,5 +22,5 @@ jobs:
       - name: Install Trunk
         uses: jetli/trunk-action@v0.1.0
 
-      - name: Build project
+      - name: Build
         run: trunk build
