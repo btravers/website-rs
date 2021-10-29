@@ -1,8 +1,5 @@
-use yew::{
-    prelude::*,
-    virtual_dom::VChild,
-    html::ChildrenRenderer,
-};
+use yew::prelude::*;
+use url::Url;
 
 use crate::{
     components::{
@@ -13,25 +10,9 @@ use crate::{
     },
 };
 
-#[derive(Clone, derive_more::From)]
-pub enum Icon {
-    GitHub(VChild<GitHub>),
-    LinkedIn(VChild<LinkedIn>),
-}
-
-impl Into<Html> for Icon {
-    fn into(self) -> Html {
-        match self {
-            Self::GitHub(child) => child.into(),
-            Self::LinkedIn(child) => child.into(),
-        }
-    }
-}
-
 #[derive(Properties, Clone)]
 pub struct SocialMediaLinkProps {
     pub href: String,
-    pub children: ChildrenRenderer<Icon>,
 }
 
 pub struct SocialMediaLink {
@@ -57,19 +38,43 @@ impl Component for SocialMediaLink {
     }
 
     fn view(&self) -> Html {
-        let SocialMediaLinkProps {
-            href,
-            children,
-        } = &self.props;
         html! {
             <a
-                href={href.clone()}
+                href={self.props.href.clone()}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="linkedin"
             >
-                { for children.iter() }
+                {self.icon_view()}
             </a>
+        }
+    }
+}
+
+impl SocialMediaLink {
+    fn icon_view(&self) -> Html {
+        let url = Url::parse(&self.props.href).unwrap();
+        match url.domain() {
+            Some("www.github.com") => {
+                return html! {
+                    <GitHub />
+                };
+            }
+            Some("www.linkedin.com") => {
+                return html! {
+                    <LinkedIn />
+                };
+            }
+            Some(domain) => {
+                return html! {
+                    <div class=classes!("text-lg", "hover:underline")>
+                        {domain}
+                    </div>
+                }
+            }
+            None => {
+                panic!("No domain found")
+            }
         }
     }
 }

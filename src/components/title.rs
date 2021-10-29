@@ -4,10 +4,6 @@ use crate::{
     components::{
         section::Section,
         social_media_link::SocialMediaLink,
-        icons::{
-            linkedin::LinkedIn,
-            github::GitHub,
-        },
     },
 };
 
@@ -37,13 +33,9 @@ impl Component for Title {
                     <div class=classes!("text-xl", "md:text-3xl", "text-center")>
                         <h2>{ "développeur full stack freelance" }</h2>
                     </div>
-                    <div class=classes!("inline-grid", "grid-cols-2", "gap-5", "my-5")>
-                        <SocialMediaLink href="https://www.linkedin.com/in/btraversfr/">
-                            <LinkedIn />
-                        </SocialMediaLink>
-                        <SocialMediaLink href="https://www.github.com/btravers/">
-                            <GitHub />
-                        </SocialMediaLink>
+                    <div class=classes!("inline-grid", "grid-cols-2", "items-center", "gap-5", "my-5")>
+                        <SocialMediaLink href="https://www.linkedin.com/in/btraversfr/" />
+                        <SocialMediaLink href="https://www.github.com/btravers/" />
                     </div>
                 </div>
             </Section>

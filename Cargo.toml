@@ -12,5 +12,6 @@ categories = ["gui", "wasm", "web-programming"]
 
 [dependencies]
 yew = "0.18"
-boolinator = "2.4.0"
-derive_more = "0.99.16"
+boolinator = "2.4"
+derive_more = "0.99"
+url = "2.2"
