@@ -3,7 +3,8 @@ use yew::prelude::*;
 use crate::{
     components::{
         section::Section,
-        social_media_link::SocialMediaLink,
+        linkedin_link::LinkedInLink,
+        github_link::GitHubLink,
     },
 };
 
@@ -34,8 +35,8 @@ impl Component for Title {
                         <h2>{ "développeur full stack freelance" }</h2>
                     </div>
                     <div class=classes!("inline-grid", "grid-cols-2", "items-center", "gap-5", "my-5")>
-                        <SocialMediaLink href="https://www.linkedin.com/in/btraversfr/" />
-                        <SocialMediaLink href="https://www.github.com/btravers/" />
+                        <LinkedInLink username="btraversfr" />
+                        <GitHubLink username="btravers" />
                     </div>
                 </div>
             </Section>

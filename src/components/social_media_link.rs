@@ -1,5 +1,8 @@
-use yew::prelude::*;
-use url::Url;
+use yew::{
+    prelude::*,
+    virtual_dom::VChild,
+    html::ChildrenRenderer,
+};
 
 use crate::{
     components::{
@@ -10,9 +13,26 @@ use crate::{
     },
 };
 
+#[derive(Clone, derive_more::From)]
+pub enum Icon {
+    GitHub(VChild<GitHub>),
+    LinkedIn(VChild<LinkedIn>),
+}
+
+impl Into<Html> for Icon {
+    fn into(self) -> Html {
+        match self {
+            Self::GitHub(child) => child.into(),
+            Self::LinkedIn(child) => child.into(),
+        }
+    }
+}
+
 #[derive(Properties, Clone)]
 pub struct SocialMediaLinkProps {
     pub href: String,
+    pub label: String,
+    pub children: ChildrenRenderer<Icon>,
 }
 
 pub struct SocialMediaLink {
@@ -38,43 +58,22 @@ impl Component for SocialMediaLink {
     }
 
     fn view(&self) -> Html {
+        let SocialMediaLinkProps {
+            href,
+            label,
+            children,
+        } = &self.props;
         html! {
             <a
-                href={self.props.href.clone()}
+                href={href.clone()}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="linkedin"
+                aria-label={label.clone()}
             >
-                {self.icon_view()}
+                { for children.iter() }
             </a>
         }
     }
 }
 
-impl SocialMediaLink {
-    fn icon_view(&self) -> Html {
-        let url = Url::parse(&self.props.href).unwrap();
-        match url.domain() {
-            Some("www.github.com") => {
-                return html! {
-                    <GitHub />
-                };
-            }
-            Some("www.linkedin.com") => {
-                return html! {
-                    <LinkedIn />
-                };
-            }
-            Some(domain) => {
-                return html! {
-                    <div class=classes!("text-lg", "hover:underline")>
-                        {domain}
-                    </div>
-                }
-            }
-            None => {
-                panic!("No domain found")
-            }
-        }
-    }
-}
+
