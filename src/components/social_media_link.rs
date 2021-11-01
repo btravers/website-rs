@@ -1,8 +1,4 @@
-use yew::{
-    prelude::*,
-    virtual_dom::VChild,
-    html::ChildrenRenderer,
-};
+use yew::prelude::*;
 
 use crate::{
     components::{
@@ -13,26 +9,16 @@ use crate::{
     },
 };
 
-#[derive(Clone, derive_more::From)]
-pub enum Icon {
-    GitHub(VChild<GitHub>),
-    LinkedIn(VChild<LinkedIn>),
-}
-
-impl Into<Html> for Icon {
-    fn into(self) -> Html {
-        match self {
-            Self::GitHub(child) => child.into(),
-            Self::LinkedIn(child) => child.into(),
-        }
-    }
+#[derive(Clone)]
+pub enum SocialMedia {
+    GITHUB,
+    LINKEDIN,
 }
 
 #[derive(Properties, Clone)]
 pub struct SocialMediaLinkProps {
-    pub href: String,
-    pub label: String,
-    pub children: ChildrenRenderer<Icon>,
+    pub media: SocialMedia,
+    pub username: String,
 }
 
 pub struct SocialMediaLink {
@@ -58,20 +44,42 @@ impl Component for SocialMediaLink {
     }
 
     fn view(&self) -> Html {
-        let SocialMediaLinkProps {
-            href,
-            label,
-            children,
-        } = &self.props;
         html! {
             <a
-                href={href.clone()}
+                href={self.href()}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={label.clone()}
+                aria-label={self.label()}
             >
-                { for children.iter() }
+                { self.icon() }
             </a>
+        }
+    }
+}
+
+impl SocialMediaLink {
+    fn href(&self) -> String {
+        match self.props.media {
+            SocialMedia::GITHUB => format!("https://www.github.com/{}/", self.props.username),
+            SocialMedia::LINKEDIN => format!("https://www.linkedin.com/in/{}/", self.props.username),
+        }
+    }
+
+    fn label(&self) -> String {
+        match self.props.media {
+            SocialMedia::GITHUB => String::from("github"),
+            SocialMedia::LINKEDIN => String::from("linkedin"),
+        }
+    }
+
+    fn icon(&self) -> Html {
+        match self.props.media {
+            SocialMedia::GITHUB => html! {
+                <GitHub />
+            },
+            SocialMedia::LINKEDIN => html! {
+                <LinkedIn />
+            },
         }
     }
 }
